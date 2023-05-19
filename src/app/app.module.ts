@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { StoreModule } from '@ngrx/store';
 import { contactsReducer } from './store/contacts.reducer';
-import { initialContactsState } from './store/contacts.state';
+import { ContactsState } from './store/contacts.state';
 
 
 import { AppComponent } from './app.component';
@@ -18,7 +18,7 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({ contacts: contactsReducer }, { initialState: { contacts: initialContactsState } })
+    StoreModule.forRoot<ContactsState>({ contacts: contactsReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
