@@ -1,11 +1,4 @@
-export interface Contact {
-    id: number; 
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-}
-
-
+ import { Contact } from '../types/contact.type';
 export interface ContactsState  {
  contacts: Contact[];
 }
