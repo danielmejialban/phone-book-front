@@ -7,19 +7,27 @@ import { contactsReducer } from './store/contacts.reducer';
 
 import { AppComponent } from './app.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
-import { ContactFormComponent } from './components/contact-form/contact-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { ContactsEffects } from './store/contacts.effects';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddContactModalComponent } from './modals/add-contact-modal/add-contact-modal.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactListComponent,
-    ContactFormComponent
+    AddContactModalComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
+    HttpClientModule,
     FormsModule,
+    NgbModule,
+    EffectsModule.forRoot([ContactsEffects]),
     StoreModule.forRoot({ contacts: contactsReducer })
   ],
   providers: [],

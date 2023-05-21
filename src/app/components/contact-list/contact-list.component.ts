@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select} from '@ngrx/store';
+import { Store} from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Contact } from '../../types/contact.type'; 
-import { loadContacts, deleteContact } from '../../store/contacts.actions';
+import { deleteContact , loadContacts} from '../../store/contacts.actions';
 import { selectAllContacts, selectContactsLoading, selectContactsError } from 'src/app/store/contacts.selectors';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddContactModalComponent } from 'src/app/modals/add-contact-modal/add-contact-modal.component';
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -12,21 +13,22 @@ import { selectAllContacts, selectContactsLoading, selectContactsError } from 's
 })
 export class ContactListComponent implements OnInit {
 
-  contacts$: Observable<Contact[]>;
-  loading$: Observable<boolean>;
-  error$: Observable<string| null>;
+  public contacts$: Observable<Contact[]> = this.store.select(selectAllContacts);
+  public loading$: Observable<boolean> = this.store.select(selectContactsLoading);
+  public error$: Observable<string| null> = this.store.select(selectContactsError);
 
-  constructor(private store: Store) {
-    this.contacts$ = this.store.pipe(select(selectAllContacts));
-    this.loading$ = this.store.pipe(select(selectContactsLoading));
-    this.error$ = this.store.pipe(select(selectContactsError));
-  }
+  constructor(private readonly store: Store,
+              private readonly modalService: NgbModal ) {  }
 
   ngOnInit(): void {
     this.store.dispatch(loadContacts());
   }
 
-  deleteContact(id: number|undefined): void {
+  public openModal(): void {
+    this.modalService.open(AddContactModalComponent, {ariaLabelledBy: 'modal-basic-title'});
+  }
+
+  public deleteContact(id?: number): void {
     this.store.dispatch(deleteContact({ id }));
   }
 }

@@ -1,16 +1,22 @@
-<h2>Contact List</h2>
-
-<div *ngIf="(loading$ | async)">
-  Loading contacts...
+<div class="container">
+  <header>
+    <i class="fas fa-address-book"></i>
+    <h1>PHONE BOOK</h1>
+    <button>
+      <i class="fas fa-plus" (click)="openModal()"></i>
+      Add
+    </button>
+  </header>
+  <ul class="contact-list">
+    <li *ngFor="let contact of (contacts$ | async)">
+      <div class="contact-details">
+        <i class="fas fa-user"></i>
+        <h3>{{ contact.firstName }} {{ contact.lastName }}</h3>
+        <p class="contact-phone">{{ contact.phoneNumber }}</p>
+      </div>
+      <button (click)="deleteContact(contact.id)" class="delete-button">
+        <i class="fas fa-trash-alt"></i>Delete
+      </button>
+    </li>
+  </ul>
 </div>
-
-<div *ngIf="(error$ | async) as error">
-  Error: {{ error }}
-</div>
-
-<ul *ngIf="!(loading$ | async) && !(error$ | async)">
-  <li *ngFor="let contact of (contacts$ | async)">
-    {{ contact.firstName }} {{ contact.lastName }} - {{ contact.phoneNumber }}
-    <button (click)="deleteContact(contact.id)">Delete</button>
-  </li>
-</ul>

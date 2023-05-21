@@ -16,6 +16,7 @@ export const initialState: ContactsState = {
 
 export const contactsReducer = createReducer<ContactsState>(
   initialState,
+
   on(ContactsActions.loadContacts, state => ({
     ...state,
     loading: true,
@@ -32,10 +33,16 @@ export const contactsReducer = createReducer<ContactsState>(
     loading: false,
     error
   })),
+
   on(ContactsActions.addContact, (state, { contact }) => ({
     ...state,
     contacts: [...state.contacts, contact]
   })),
+  on(ContactsActions.addContactSuccess, (state, { contact }) =>
+  ({ ...state, contacts: [...state.contacts, contact] })),
+  on(ContactsActions.addContactFailure, (state, { error }) => ({ ...state, error })),
+
+  
   on(ContactsActions.updateContact, (state, { contact }) => ({
     ...state,
     contacts: state.contacts.map(c => (c.id === contact.id ? contact : c))
