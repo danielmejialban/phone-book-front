@@ -34,19 +34,22 @@ export const contactsReducer = createReducer<ContactsState>(
     error
   })),
 
-  on(ContactsActions.addContact, (state, { contact }) => ({
-    ...state,
-    contacts: [...state.contacts, contact]
-  })),
-  on(ContactsActions.addContactSuccess, (state, { contact }) =>
-  ({ ...state, contacts: [...state.contacts, contact] })),
-  on(ContactsActions.addContactFailure, (state, { error }) => ({ ...state, error })),
+  on(ContactsActions.addContact, (state, { contact }) => {
+    const existingContact = state.contacts.find(c => c.id === contact.id);
+    if (existingContact) {
+      return state;
+    }
+    return {
+      ...state,
+      contacts: [...state.contacts, contact]
+    };
+  }),
 
-  
-  on(ContactsActions.updateContact, (state, { contact }) => ({
-    ...state,
-    contacts: state.contacts.map(c => (c.id === contact.id ? contact : c))
+
+  on(ContactsActions.updateContact, (state, { contact }) =>
+   ({ ...state, contacts: state.contacts.map(c => (c.id === contact.id ? contact : c))
   })),
+  
   on(ContactsActions.deleteContact, (state, { id }) => ({
     ...state,
     contacts: state.contacts.filter(c => c.id !== id)

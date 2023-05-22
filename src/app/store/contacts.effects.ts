@@ -50,7 +50,7 @@ export class ContactsEffects {
     this.actions$.pipe(
       ofType(updateContact),
       switchMap(action =>
-        this.contactsService.updateContact(action.id,action.contact).pipe(
+        this.contactsService.updateContact(action.contact).pipe(
           map(contact => updateContactSuccess({ contact })),
           catchError(error => of(updateContactFailure({ error })))
         )

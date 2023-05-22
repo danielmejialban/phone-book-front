@@ -16,6 +16,7 @@ export class ContactsService {
     return this.http.get<Contact[]>(`${this.urlBase}/getAll`);
   }
 
+  //TODO: implement getContactById
   public getContactById(id: number): Observable<Contact> {
     return this.http.get<Contact>(`${this.urlBase}/${id}`);
   }
@@ -28,8 +29,8 @@ export class ContactsService {
     return this.http.delete<Contact>(`${this.urlBase}/${id}`);
   }
 
-  public updateContact(id: number, contact: Contact): Observable<Contact> {
-    return this.http.put<Contact>(`${this.urlBase}/${id}`, contact);
+  public updateContact(contact: Contact): Observable<Contact> {
+    return this.http.put<Contact>(`${this.urlBase}/${contact.id}`, contact);
   }
 
 }

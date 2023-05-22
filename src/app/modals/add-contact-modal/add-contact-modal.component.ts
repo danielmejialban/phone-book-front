@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { addContact } from '../../store/contacts.actions';
 import { Contact } from '../../types/contact.type';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-add-contact-modal',
   templateUrl: './add-contact-modal.component.html',
@@ -13,7 +15,8 @@ export class AddContactModalComponent  {
   public contactForm: FormGroup;
 
   constructor(private store: Store, 
-              private readonly formBuilder: FormBuilder) {
+              private readonly formBuilder: FormBuilder,
+              public dialogRef: MatDialogRef<AddContactModalComponent>) {
       this.contactForm = this.instantiaceForm(this.formBuilder);
   }
 
@@ -24,7 +27,7 @@ export class AddContactModalComponent  {
       phoneNumber: new FormControl('', Validators.required)
     });
   }
-
+  
   onSubmit(): void {
     const contact: Contact = {
       firstName: this.contactForm.value.firstName,
@@ -32,7 +35,7 @@ export class AddContactModalComponent  {
       phoneNumber: this.contactForm.value.phoneNumber
     };
     this.store.dispatch(addContact({ contact }));
-    this.contactForm.reset();
+    this.dialogRef.close();
   }
 
 }

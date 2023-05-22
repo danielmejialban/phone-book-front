@@ -1,0 +1,29 @@
+<h2>Edit Contact</h2>
+
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="firstName">First Name:</label>
+    <input type="text" 
+            id="firstName"
+            name="firstName" 
+            formControlName="firstName">
+  </div>
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input type="text" 
+            id="lastName" 
+            name="lastName" 
+            formControlName="lastName">
+  </div>
+  <div>
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" 
+            id="phoneNumber" 
+            name="phoneNumber" 
+            formControlName="phoneNumber">
+  </div>
+  <div class="button-container">
+    <button type="submit" [disabled]="contactForm.invalid" class="small-button">Update</button>
+    <button mat-button mat-dialog-close aria-label="Cerrar" class="small-button">Close</button>
+  </div>
+</form>

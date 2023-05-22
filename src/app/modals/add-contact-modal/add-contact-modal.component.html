@@ -22,7 +22,8 @@
             name="phoneNumber" 
             formControlName="phoneNumber">
   </div>
-  <div>
-    <button type="submit" [disabled]="contactForm.invalid">Add</button>
+  <div class="button-container">
+    <button type="submit" [disabled]="contactForm.invalid" class="small-button">Add</button>
+    <button mat-button mat-dialog-close aria-label="Cerrar" class="small-button">Close</button>
   </div>
 </form>

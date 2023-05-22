@@ -1,0 +1,75 @@
+$primary-color: #000;
+$secondary-color: #1e1e1e;
+$accent-color: #000;
+
+
+// Estilos generales
+body {
+  font-family: Arial, sans-serif;
+  background-color: $secondary-color;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  color: $primary-color;
+}
+
+h2 {
+  font-size: 20px;
+  color: $primary-color;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: $primary-color;
+}
+
+input[type="text"] {
+  padding: 5px;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-container {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .small-button {
+    width: 100px;
+    padding: 5px;
+    font-size: 12px;
+    margin-right: 10px;
+  }
+  
+button.secondary {
+  background-color: $secondary-color;
+  color: $primary-color;
+}
+
+button.secondary:hover {
+  background-color: $accent-color;
+  color: #fff;
+}

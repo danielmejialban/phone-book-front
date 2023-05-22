@@ -9,7 +9,7 @@ export const addContact = createAction('[Contacts] Add Contact', props<{ contact
 export const addContactSuccess = createAction('[Contacts] Add Contact Success', props<{ contact: Contact }>());
 export const addContactFailure = createAction('[Contacts] Add Contact Failure', props<{ error: string }>());
 
-export const updateContact = createAction('[Contacts] Update Contact', props<{ id: number , contact: Contact }>());
+export const updateContact = createAction('[Contacts] Update Contact', props<{  contact: Contact, id?: number }>());
 export const updateContactSuccess = createAction('[Contacts] Update Contact Success', props<{ contact: Contact }>());
 export const updateContactFailure = createAction('[Contacts] Update Contact Failure', props<{ error: string }>());
 
